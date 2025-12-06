@@ -1,8 +1,8 @@
 ---
 title: "Zenn GitHub 連携テスト"
-emoji: "🐣"
-type: "tech"
-topics: ["zenn", "github"]
+emoji: "🦉"
+type: "idea"
+topics: ["CakePHP4", "PHP8", "ドメイン駆動設計", "設計", "DDD"]
 published: false
 ---
 
@@ -39,4 +39,3 @@ published: false
 
 される！  
 ただし **published を true にした瞬間に公開されるからだけ注意。**
-
