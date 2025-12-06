@@ -21,8 +21,9 @@ published: false
 - UI（FormHelper）
 - バリデーション
 - 永続化処理
-- API 入出力  
-  すべてがこの 1 つの Entity に依存するため、設計が “DB 構造中心” になってしまいます。
+- API 入出力
+
+すべてがこの 1 つの Entity に依存するため、設計が “DB 構造中心” になってしまいます。
 
 ---
 
@@ -176,7 +177,7 @@ class UserRepository implements UserRepositoryInterface
 
 ### ✔ ドメインは軽量なモデルだけ受け取る
 
-永続化構造を知らないし知る必要もない。
+永続化構造を知らないのが大切。
 
 ---
 
@@ -187,7 +188,7 @@ class UserRepository implements UserRepositoryInterface
 
 答え：  
 **UI 専用の Cake Entity はそのまま使う。  
-ただし Application / Domain には絶対に入れない。**
+ただし Application / Domain には入れない。**
 
 ---
 
@@ -260,6 +261,41 @@ public function toPersistence(User $user): UserEntity
 
 ---
 
+## 6-4 イメージ
+
+```mermaid
+flowchart LR
+    subgraph UI[UI層]
+        A[Cake Entity - フォーム入力用]
+        Z[Form Helper]
+    end
+
+    subgraph APP[Application層]
+        B[DTO - Command]
+        C[Application Service]
+    end
+
+    subgraph DOMAIN[Domain層]
+        D[User Aggregate - ビジネスルール中心]
+        E[Repository Interface]
+    end
+
+    subgraph INFRA[Infrastructure層]
+        F[UserRepository - Cake実装]
+        H[UsersTable - Finder最適化]
+        G[Cake ORM Entity - 永続化専用]
+        M[Mapper - Domain変換]
+    end
+
+    Z --> A
+    A --> B --> C --> D
+    C --> E
+    E --> F
+    F --> M
+    M --> G
+    F --> H
+```
+
 # 7. Mapper が“依存の違い”を吸収する
 
 ```php
@@ -299,19 +335,3 @@ class UserMapper
 ### ✔ フレームワーク変更時（Laravel / Go / Rails）にもドメインが残る
 
 > **DB 変更不可の現場ほど DDD が効果を発揮する。**
-
----
-
-# あとがき（余談）
-
-巨大テーブルと向き合うとき、  
-「このモデル…本当に健全なの？」と感じる瞬間があります。
-
-CakePHP の Entity 駆動はとても便利ですが、  
-大規模化するとどうしても DB が中心になりがちです。
-
-でも、DDD を導入すると **“ビジネスロジックを中心に据えた設計”** に戻せる。  
-ドメインが整うだけで、巨大なシステムでも少しずつ息を吹き返すんですよね。
-
-今回の内容が、せんぱいの現場や読者のシステムで  
-「あ、これ試してみようかな」と思えるきっかけになれば嬉しいです。
