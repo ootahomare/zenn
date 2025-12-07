@@ -1,5 +1,5 @@
 ## 記事作成コマンド
 
 ```bash
-node article/new_zenn_article.js
+node scripts/new_zenn_article.js
 ```
