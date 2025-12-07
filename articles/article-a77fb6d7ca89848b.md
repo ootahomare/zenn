@@ -103,11 +103,9 @@ DDD における集約（Aggregate）は、
 CakePHP のインフラ依存を Repository に閉じ込めることで、  
 ドメインは純粋な集約だけに集中できる。
 
-:::info
-この記事の「Repository / Mapper / Finder」の構成は、前回の記事  
+> この記事の「Repository / Mapper / Finder」の構成は、前回の記事  
 **「CakePHP と DDD 〜集約と巨大テーブルのズレをどう吸収するか〜」**  
 でさらに詳しく紹介しています。
-:::
 
 ---
 
