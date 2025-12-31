@@ -2,11 +2,12 @@
 title: "CakePHP と DDD 〜テスト　Application レイヤー編"
 emoji: "🦉"
 type: "idea"
-topics: ["CakePHP4", "PHP8", "ドメイン駆動設計", "DDD", "テストコード"]
+topics: ["CakePHP", "PHP8", "ドメイン駆動設計", "DDD", "テストコード"]
 published: false
 ---
 
-# 0. はじめに
+# Application 層を主語にしたテストコードの書き方
+## ― CakePHP × DDD における UseCase テスト ―
 
 本記事では **CakePHP 5.2** における **Application 層（UseCase）のテスト** を、
 段階的に解説します。
@@ -343,7 +344,9 @@ if ($this->customerRepository->existsByEmail(new Email($input->email))) {
 * Application 層テストは **UseCase を主語**にする
 * Fake は I/O 境界に限定する（依存洗い出しが重要）
 
-# 7. あとがき
+---
+
+# あとがき
 DI（依存注入）は CakePHP の ContainerInterface で実装しているのですが、
 そこの内容がしっかりしていると、Fake への差し替えが楽になりますね。
 
